@@ -40,7 +40,7 @@ public class ProjectController extends BaseController {
     }
 
     /**
-     * 新增通知公告
+     * 新增项目基本信息
      */
     @SaCheckPermission("biz:project:add")
     @Log(title = "新增项目基本信息", businessType = BusinessType.INSERT)
