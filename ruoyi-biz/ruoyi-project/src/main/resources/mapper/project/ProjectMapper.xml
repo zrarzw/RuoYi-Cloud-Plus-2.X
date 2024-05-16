@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.project.mapper.ProjectMapper">
+    <!-- 多结构嵌套自动映射需带上每个实体的主键id 否则映射会失败 -->
+    <resultMap type="org.dromara.project.domain.vo.ProjectVo" id="ProjectResult">
+        <id property="wtProjectId" column="wt_project_id"/>
+        <result property="wtProjectName" column="wt_project_name"/>
+        <result property="wtProjectGroupWork" column="wt_project_group_work"/>
+        <result property="wtProjectSupervisor" column="wt_project_supervisor"/>
+        <result property="wtProjectPro" column="wt_project_pro"/>
+        <result property="wtProjectStartTime" column="wt_project_start_time"/>
+        <result property="wtProjectEndTime" column="wt_project_end_time"/>
+    </resultMap>
+
+    <sql id="projectVo" >
+        select p.wt_project_id,
+               p.wt_project_name,
+               p.wt_project_group_work,
+               p.wt_project_supervisor,
+               p.wt_project_pro,
+               p.wt_project_start_time,
+               p.wt_project_end_time,
+               p.tenant_id
+        from wt_project p
+    </sql>
+
+
+    <select id="selectPageProjectList" resultMap="ProjectResult">
+        select p.wt_project_id,
+               p.wt_project_name,
+               p.wt_project_group_work,
+               p.wt_project_supervisor,
+               p.wt_project_pro,
+               p.wt_project_start_time,
+               p.wt_project_end_time,
+               p.tenant_id
+        from wt_project p
+            ${ew.getCustomSqlSegment}
+    </select>
+</mapper>
